@@ -1,0 +1,30 @@
+{% extends 'root/main2.html' %}
+{% load static %}
+{% block content %}
+    <div>   
+        <div>
+            <h2>Order Status: ORDER PLACED</h2> 
+            <h2>Mode: Cash On Delivery</h2>
+        </div>
+
+        <div class="col-lg-6">
+			<div class="box-element" style="width:800px;" >
+				<a  class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; Back to Cart</a>
+				<hr>
+				<h3>Order Summary</h3>
+				<hr>
+				{% for item in items %}
+				<div class="cart-row">
+					<div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
+					<div style="flex:2"><p>{{item.product.name}}</p></div>
+					<div style="flex:1"><p>₹{{item.product.price}}</p></div>
+					<div style="flex:1"><p>x{{item.quantity}}</p></div>
+				</div>
+			 	{% endfor %}
+				<h5>Items:   {{order.get_cart_items}}</h5>
+				<h5>Total:   ₹{{order.get_cart_total}}</h5>
+			</div>
+		</div>
+	</div>
+    </div>
+{% endblock content%}

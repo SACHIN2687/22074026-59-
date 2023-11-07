@@ -1,0 +1,35 @@
+{% extends 'root/main.html' %}
+{%  load static %}
+{%  block content %}
+	
+
+	<div class="row">
+		{% for product in products %}
+		<div class="col-lg-4">
+
+			<img class="thumbnail" src="{{product.imageURL}}" style="max-width=100%">
+			<div class="box-element product">
+				<h4><strong>{{product.name}}</strong></h4>
+				<hr>
+
+				<form method='post' action="{% url 'add_to_cart' product.id %}">
+					{% csrf_token %}
+					<button  class="btn btn-outline-secondary add-btn update-cart" type='submit'>Add to Cart</button>
+				</form>
+				<form method='post' action="{% url 'view' product.id %}">
+					{% csrf_token %}
+					<button class="btn btn-outline-success" style="margin-left:10px; margin-right:auto;">View</button>
+				<h4 style="display: inline-block; float:right;"><strong>₹{{product.price}}</strong></h4>
+				</form>
+			</div>
+		</div>
+		{% endfor %}
+
+	</div>
+		
+		
+		
+
+{% endblock content %}
+
+

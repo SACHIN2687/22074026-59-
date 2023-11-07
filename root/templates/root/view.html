@@ -1,0 +1,76 @@
+{% extends 'root/main2.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+
+	body {
+	    font-family: 'Arial', sans-serif;
+	    background-color: #f4f4f4;
+	    margin: 0;
+	    padding: 0;
+	}
+
+	/*.container {
+	    max-width: 1200px;
+	    margin: 0 auto;
+	    padding: 20px;
+	}*/
+	
+	.box-element_v {
+	    background-color: #fff;
+	    padding: 20px;
+	    margin-bottom: 20px;
+	    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	}
+
+	.btn {
+    		display: inline-block;
+    		padding: 10px 20px;
+    		font-size: 16px;
+    		text-decoration: none;
+    		border: none;
+    		cursor: pointer;
+	}
+
+	.btn-outline-dark {
+    		color: #333;
+    		border: 2px solid #333;
+    		background-color: transparent;
+	}
+
+	.btn-outline-dark:hover {
+    		background-color: #333;
+    		color: #fff;
+	}
+	
+	.img-fluid{
+		width:500px;
+		height:300px;
+	}
+
+/* Add more styles as needed */
+
+</style>
+
+<div class="col-lg-20">
+    <div class="box-element_v">
+    	<a class="btn btn-outline-dark" href="{% url 'store' %}" style="float:right;">&#x2190; Back to Store</a>
+    	<br>
+    	<div class="img-description" style="display:flex">
+        	<span style="flex-growth:1; flex:1;"><img class="img-fluid" src="{{ products.imageURL }}" alt="{{ product.name }}"></span>
+        	<span style="flex-growth:3; flex:1;"><p>Description</p></span>
+        </div>
+        
+        <h2>{{ products.name }}</h2>
+
+        <p><strong>Price:</strong> ₹{{ products.price }}</p>
+        <form method='post' action="{% url 'add_to_cart' products.id %}">
+            {% csrf_token %}
+            <button class="btn btn-outline-secondary add-btn update-cart" type='submit'>Add to Cart</button>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
+
